@@ -22,7 +22,8 @@ class CommentForm extends Component{
             });
         }
         handleSubmit(values){
-            this.props.postComment(this.props.dishId, values.ratng, values.author, values.comment);
+            this.props.postComment(this.props.dishId, values.rating, values.author, values.comment);
+            alert(JSON.stringify(values));
         }
         render(){
         return(
