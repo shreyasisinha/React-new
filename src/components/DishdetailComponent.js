@@ -20,8 +20,7 @@ class CommentForm extends Component{
             });
         }
         handleSubmit(values){
-            console.log(values);
-            alert("Current State is" + JSON.stringify(values));
+            this.props.addComment(this.props.dishId, values.ratng, values.author, values.comment);
         }
         render(){
         return(
@@ -65,7 +64,7 @@ class CommentForm extends Component{
                             />                       
                      </Row>
                      <Row className="form-group">
-                         <Label htmlFor="comment">Your Name</Label>
+                         <Label htmlFor="comment">Comment</Label>
                          <Control.textarea model=".comment" id="comment" name="comment"
                          rows="6"
                          className="form-control"/>
@@ -96,7 +95,7 @@ function RenderDish({dish}) {
     );
 
 }
-        function RenderComments({comments}){
+        function RenderComments({comments, addComment, dishId}){
             if(comments==null){
                 return(
                     <div></div>
@@ -120,7 +119,7 @@ function RenderDish({dish}) {
                    <h4>Comments</h4>
                    <ul className='list-unstyled'>
                     {menus}
-                    <CommentForm/>
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </ul>
                 </div>
            );
@@ -145,7 +144,10 @@ function RenderDish({dish}) {
                             <RenderDish dish={props.dish} />                              
                          </div>
                          <div className="col-12 col-md-5 m-1">
-                         <RenderComments comments={props.comments}/>
+                         <RenderComments comments={props.comments}
+                         addComment={props.addComment}
+                         dishId={props.dish.id}
+                         />
                          
                          </div>
                         
